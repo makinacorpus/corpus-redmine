@@ -1,0 +1,79 @@
+#
+# This file contains default values which are used
+# by the salt states deploying your project.
+# you may copy them to your relevant PILLAR file
+# before editing them.
+# If you need to add variables, this is where to begin.
+# Please keep defaults in there, but real passwords
+# must be putted inside pillar
+#
+# replace project_name in your pillar by
+# the current projectname
+# you can also merge parts of this file
+# with the relevant pillar
+#
+# think that dicts are updated/merged with default
+# but lists are overidden
+#
+
+
+# copy and adapt this in the real pillar to allow maxsize for 
+# attachements
+# makina-states.services.http.nginx.client_max_body_size: 700M
+
+
+makina-projects.projectname:
+  data:
+    nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
+    nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
+    host: 127.0.0.1
+    port: 9000
+    rversion: 1.9.3
+    version: 2.5.2
+    smtp_address: 127.0.0.1
+    smtp_tls: true
+    smtp_noauth: False
+    smtp_port: 25
+    smtp_domain: null
+    smtp_user: foo.com
+    smtp_password: foo.com
+    files: "{data_root}/files"
+    db_adapter: mysql2
+    db_name: redmine
+    db_user: redmine
+    db_password: redmine
+    db_host: localhost
+    db_port: 3306
+    use_ldap: false
+    plugins:
+      redmine_ckeditor:
+        git: https://github.com/a-ono/redmine_ckeditor.git
+      redmine_default_assign:
+        git: https://github.com/giddie/redmine_default_assign.git
+      redmine_digest:
+        git: https://github.com/drewkeller/redmine_digest.git
+      redmine_importr:
+        git: https://github.com/zh/redmine_importer.git
+      redmine_dmsf:
+        git: https://github.com/danmunn/redmine_dmsf.git
+      redmine_ldap_sync:
+        git: https://github.com/thorin/redmine_ldap_sync.git
+      redmine_lightbox:
+        git: https://github.com/zipme/redmine_lightbox.git
+      scrum2b:
+        git: https://github.com/scrum2b/scrum2b.git
+      Redmine-Monitoring-Controlling:
+        git: https://github.com/alexmonteiro/Redmine-Monitoring-Controlling.git
+  env_defaults:
+    dev:
+      opt: value2
+  os_defaults:
+    Ubuntu:
+# os  filter
+      opt: value1
+    Debian:
+# os familly filter
+      opt1: value11
+
+
+# vim:set ft=yaml sts=2 ts=2:
