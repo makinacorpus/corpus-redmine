@@ -28,6 +28,7 @@ makina-projects.projectname:
     nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
     host: 127.0.0.1
     port: 9000
+    log_level: Logger::ERROR
     rversion: 1.9.3
     version: 2.5.2
     smtp_address: 127.0.0.1
@@ -49,7 +50,7 @@ makina-projects.projectname:
       redmine_ckeditor:
         git: https://github.com/a-ono/redmine_ckeditor.git
       redmine_default_assign:
-        git: https://github.com/giddie/redmine_default_assign.git
+        git: https://github.com/makinacorpus/redmine_default_assign.git
       redmine_digest:
         git: https://github.com/drewkeller/redmine_digest.git
       redmine_importr:
@@ -62,7 +63,7 @@ makina-projects.projectname:
         git: https://github.com/zipme/redmine_lightbox.git
       scrum2b:
         git: https://github.com/scrum2b/scrum2b.git
-      Redmine-Monitoring-Controlling:
+      redmine_monitoring_controlling:
         git: https://github.com/alexmonteiro/Redmine-Monitoring-Controlling.git
   env_defaults:
     dev:

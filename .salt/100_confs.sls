@@ -3,6 +3,7 @@
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 {% set project_root=cfg.project_root%}
 {% for i in ['redmine/Gemfile.local',
+             'redmine/config/environments/production.rb',
              'redmine/config/additional_environment.rb',
              'redmine/config/database.yml',
              'redmine/config/configuration.yml',] %}
@@ -16,6 +17,7 @@
     - user: "{{cfg.user}}"
     - group: "root"
     - defaults:
+        project: {{cfg.name}}
         cfg: |
              {{scfg}}
 {% endfor %}

@@ -1,4 +1,4 @@
-{% set cfg = salt['mc_utils.json_load'](cfg) %}
+{% set cfg = salt['mc_project.get_configuration'](project) %}
 # = Redmine configuration file
 #
 # Each environment has it's own configuration options.  If you are only
