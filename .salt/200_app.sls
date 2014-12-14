@@ -12,10 +12,9 @@
       - RAILS_ENV: production
 {% endmacro%}
 
-
-{{cfg.name}}-rvm-wrapper:
+{{cfg.name}}-rvm-wrapper-env:
   file.managed:
-    - name: {{cfg.project_root}}/rvm.sh
+    - name: {{cfg.project_root}}/rvm-env.sh
     - mode: 750
     - user: {{cfg.user}}
     - group: {{cfg.group}}
@@ -30,7 +29,20 @@
                 . /etc/profile
                 . /usr/local/rvm/scripts/rvm
                 rvm --create use ${RVERSION}@${GEMSET}
+
+{{cfg.name}}-rvm-wrapper:
+  file.managed:
+    - name: {{cfg.project_root}}/rvm.sh
+    - mode: 750
+    - user: {{cfg.user}}
+    - group: {{cfg.group}}
+    - require:
+      - file: {{cfg.name}}-rvm-wrapper-env
+    - contents: |
+                #!/usr/bin/env bash
+                set -e
                 cd "${CWD}"
+                . ./rvm-env.sh
                 exec "${@}"
 
 {{cfg.name}}-add-to-rvm:
