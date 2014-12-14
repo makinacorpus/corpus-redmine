@@ -21,15 +21,17 @@
     - group: {{cfg.group}}
     - contents: |
                 #!/usr/bin/env bash
+                set -e
 
                 CWD="${PWD}";
                 GEMSET="${GEMSET:-"{{cfg.name}}"}";
                 RVERSION="${RVERSION:-"{{data.rversion.strip()}}"}"
 
-                . /etc/profile \
-                && . /usr/local/rvm/scripts/rvm \
-                && rvm --create use ${RVERSION}@${GEMSET}
-                cd "${CWD}" && exec "${@}"
+                . /etc/profile
+                . /usr/local/rvm/scripts/rvm
+                 rvm --create use ${RVERSION}@${GEMSET}
+                cd "${CWD}"
+                exec "${@}"
 
 {{cfg.name}}-add-to-rvm:
   user.present:
