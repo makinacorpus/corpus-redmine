@@ -29,7 +29,7 @@
 
                 . /etc/profile
                 . /usr/local/rvm/scripts/rvm
-                 rvm --create use ${RVERSION}@${GEMSET}
+                rvm --create use ${RVERSION}@${GEMSET}
                 cd "${CWD}"
                 exec "${@}"
 
