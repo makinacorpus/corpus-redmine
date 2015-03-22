@@ -23,7 +23,7 @@
                 set -e
 
                 CWD="${PWD}";
-                GEMSET="${GEMSET:-"{{cfg.name}}"}";
+                GEMSET="${GEMSET:-"{{data.gemset}}"}";
                 RVERSION="${RVERSION:-"{{data.rversion.strip()}}"}"
 
                 . /etc/profile

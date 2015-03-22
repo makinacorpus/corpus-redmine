@@ -4,7 +4,17 @@ RedmineApp::Application.configure do
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true
+  config.log_level = :info
 
+  # Eager load code on boot. This eager loads most of Rails and
+  # your application in memory, allowing both threaded web servers
+  # and those relying on copy on write to perform better.
+  # Rake tasks automatically ignore this option for performance.
+  config.eager_load = true
+
+   # Full error reports are disabled and caching is turned on.
+  config.consider_all_requests_local = false
+  config.action_controller.perform_caching = true 
   #####
   # Customize the default logger
   # http://www.ruby-doc.org/stdlib-1.8.7/libdoc/logger/rdoc/Logger.html
@@ -30,5 +40,10 @@ RedmineApp::Application.configure do
   # No email in production log
   config.action_mailer.logger = nil
 
+
   config.active_support.deprecation = :log
+
+  config.secret_token = '{{salt['mc_utils.generate_stored_password'](cfg.name+"-rails_pw", 96)}}'
+  config.active_record.raise_in_transactional_callbacks = true
+  config.active_record.whitelist_attributes = false
 end

@@ -32,4 +32,4 @@ include:
     doc_root=cfg.project_root+'/redmine/public',
     vh_top_source=data.nginx_upstreams,
     vh_content_source=data.nginx_vhost,
-    cfg=cfg)}}
+    cfg=cfg.name)}}

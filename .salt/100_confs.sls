@@ -18,6 +18,4 @@
     - group: "root"
     - defaults:
         project: {{cfg.name}}
-        cfg: |
-             {{scfg}}
 {% endfor %}
