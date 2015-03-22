@@ -41,7 +41,7 @@
     - contents: |
                 #!/usr/bin/env bash
                 set -e
-                w="$(dirname ${0})"
+                w="$(dirname "${0}")"
                 cd "${w}"
                 CWD="${PWD}"
                 cd "${CWD}"
