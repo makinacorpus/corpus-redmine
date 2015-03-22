@@ -2,6 +2,10 @@
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 {% set project_root=cfg.project_root%}
+
+include:
+  - makina-projects.{{cfg.name}}.task_rvm
+
 {% for i in ['redmine/Gemfile.local',
              'redmine/config/environments/production.rb',
              'redmine/config/additional_environment.rb',

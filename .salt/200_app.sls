@@ -4,6 +4,9 @@
 {% set project_root=cfg.project_root%}
 {% import "makina-states/localsettings/rvm.sls" as rvm with context %}
 
+include:
+  - makina-projects.{{cfg.name}}.task_rvm
+
 {% macro project_rvm() %}
 {% do kwargs.setdefault('gemset', cfg.name)%}
 {% do kwargs.setdefault('version', data.rversion)%}
@@ -11,42 +14,6 @@
     - env:
       - RAILS_ENV: production
 {% endmacro%}
-
-{{cfg.name}}-rvm-wrapper-env:
-  file.managed:
-    - name: {{cfg.project_root}}/rvm-env.sh
-    - mode: 750
-    - user: {{cfg.user}}
-    - group: {{cfg.group}}
-    - contents: |
-                #!/usr/bin/env bash
-                set -e
-
-                CWD="${PWD}";
-                GEMSET="${GEMSET:-"{{data.gemset}}"}";
-                RVERSION="${RVERSION:-"{{data.rversion.strip()}}"}"
-
-                . /etc/profile
-                . /usr/local/rvm/scripts/rvm
-                rvm --create use ${RVERSION}@${GEMSET}
-
-{{cfg.name}}-rvm-wrapper:
-  file.managed:
-    - name: {{cfg.project_root}}/rvm.sh
-    - mode: 750
-    - user: {{cfg.user}}
-    - group: {{cfg.group}}
-    - require:
-      - file: {{cfg.name}}-rvm-wrapper-env
-    - contents: |
-                #!/usr/bin/env bash
-                set -e
-                w="$(dirname "${0}")"
-                cd "${w}"
-                CWD="${PWD}"
-                cd "${CWD}"
-                . ./rvm-env.sh
-                exec "${@}"
 
 {{cfg.name}}-add-to-rvm:
   user.present:
