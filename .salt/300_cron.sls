@@ -13,6 +13,6 @@
     - contents: |
                 #!/usr/bin/env bash
                 MAILTO=root
-                */10 * * * * {{cfg.user}} cd {{cfg.project_root}}/redmine && ../rvm.sh rake -f Rakefile --silent redmine:plugins:ldap_sync:sync_users RAILS_ENV=production 2>&- 1>/dev/null
+                */10 * * * * {{cfg.user}} cd {{cfg.project_root}}/redmine && ../rvm.sh bundle exec rake -f Rakefile --silent redmine:plugins:ldap_sync:sync_users RAILS_ENV=production 2>&- 1>/dev/null
 
 
