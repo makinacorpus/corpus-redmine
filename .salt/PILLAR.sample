@@ -31,7 +31,7 @@ makina-projects.projectname:
     log_level: Logger::ERROR
     rversion: 2.1.2
     #rversion: 1.9.3
-    version: 3.0.1
+    version: 3.0.3
     smtp_address: 127.0.0.1
     smtp_tls: true
     smtp_noauth: False

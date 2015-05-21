@@ -50,7 +50,7 @@ include:
       - cmd: {{cfg.name+'-bundler'}}
 
 {{project_rvm(
- 'rake generate_secret_token'.format(cfg.data_root),
+ 'bundle exec rake generate_secret_token'.format(cfg.data_root),
  state=cfg.name+'-install-session')}}
     - cwd: {{cfg.project_root}}/redmine
     - user: {{cfg.user}}
@@ -58,7 +58,7 @@ include:
       - cmd: {{cfg.name+'-install-redmine'}}
 
 {{project_rvm(
- 'rake db:migrate --trace'.format(cfg.data_root), state=cfg.name+'-migrate')}}
+ 'bundle exec rake db:migrate --trace'.format(cfg.data_root), state=cfg.name+'-migrate')}}
     - cwd: {{cfg.project_root}}/redmine
     - user: {{cfg.user}}
     - require:
@@ -66,7 +66,7 @@ include:
 
 
 {{project_rvm(
- 'rake redmine:plugins:migrate --trace'.format(cfg.data_root), state=cfg.name+'-plugins-migrate')}}
+ 'bundle exec rake redmine:plugins:migrate --trace'.format(cfg.data_root), state=cfg.name+'-plugins-migrate')}}
     - cwd: {{cfg.project_root}}/redmine
     - user: {{cfg.user}}
     - require:
@@ -74,8 +74,8 @@ include:
 
 
 {{project_rvm(
- 'rake tmp:cache:clear --trace'
- '&& rake tmp:sessions:clear --trace'.format(cfg.data_root), state=cfg.name+'-clear')}}
+ 'bundle exec rake tmp:cache:clear --trace'
+ '&& bundle exec rake tmp:sessions:clear --trace'.format(cfg.data_root), state=cfg.name+'-clear')}}
     - cwd: {{cfg.project_root}}/redmine
     - user: {{cfg.user}}
     - require:
