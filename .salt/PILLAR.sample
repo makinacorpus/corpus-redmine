@@ -57,6 +57,7 @@ makina-projects.projectname:
         git: https://github.com/drewkeller/redmine_digest.git
       redmine_importer:
         git: https://github.com/makinacorpus/redmine_importer.git
+        rev: "redmine3-3"
       redmine_dmsf:
         git: https://github.com/makinacorpus/redmine_dmsf.git
         rev: "devel-1.5.1"
