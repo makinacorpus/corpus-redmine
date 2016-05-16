@@ -24,6 +24,7 @@
 
 makina-projects.projectname:
   data:
+    fixperms_cron_periodicity: "0 */2 * * *"
     nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
     nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
     host: 127.0.0.1
