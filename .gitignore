@@ -5,3 +5,5 @@ rvm.sh
 /redmine-*.tar.gz
 /redmine-3.0.1/
 /rvm-env.sh
+*.swp
+/corpus-redmine/
