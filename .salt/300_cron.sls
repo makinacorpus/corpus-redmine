@@ -2,9 +2,9 @@
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 {% set project_root=cfg.project_root%}
-{% import "makina-states/localsettings/rvm.sls" as rvm with context %}
 
 {{cfg.name}}-rvm-wrapper:
+  {% if data.get('use_ldap', False) %}
   file.managed:
     - name: /etc/cron.d/ldapredmine{{cfg.name}}
     - mode: 750
@@ -14,5 +14,7 @@
                 #!/usr/bin/env bash
                 MAILTO=root
                 */10 * * * * {{cfg.user}} cd {{cfg.project_root}}/redmine && ../rvm.sh bundle exec rake -f Rakefile --silent redmine:plugins:ldap_sync:sync_users RAILS_ENV=production 2>&- 1>/dev/null
-
-
+  {% else %}
+  file.absent:
+    - name: /etc/cron.d/ldapredmine{{cfg.name}}
+  {% endif%}

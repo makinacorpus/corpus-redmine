@@ -8,7 +8,7 @@ include:
   - makina-projects.{{cfg.name}}.task_rvm
 
 {% macro project_rvm() %}
-{% do kwargs.setdefault('gemset', cfg.name)%}
+{% do kwargs.setdefault('gemset', cfg.data.gemset)%}
 {% do kwargs.setdefault('version', data.rversion)%}
 {{rvm.rvm(*varargs, **kwargs)}}
     - env:

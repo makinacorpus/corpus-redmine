@@ -17,7 +17,7 @@
 #
 
 
-# copy and adapt this in the real pillar to allow maxsize for 
+# copy and adapt this in the real pillar to allow maxsize for
 # attachements
 # makina-states.services.http.nginx.client_max_body_size: 700M
 
@@ -70,6 +70,9 @@ makina-projects.projectname:
         git: https://github.com/makinacorpus/scrum2b.git
       redmine_monitoring_controlling:
         git: https://github.com/alexmonteiro/Redmine-Monitoring-Controlling.git
+    force_ssl: true
+    htaccess: "/etc/{name}.webaccess"
+    http_users: []
   env_defaults:
     dev:
       opt: value2

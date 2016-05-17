@@ -12,11 +12,12 @@
     - contents: |
                 #!/usr/bin/env bash
                 set -e
-                GEMSET="${GEMSET:-"{{data.gemset}}"}";
+                GEMSET="${GEMSET:-"{{data.gemset}}"}"
                 RVERSION="${RVERSION:-"{{data.rversion.strip()}}"}"
-                . /etc/profile
-                . /usr/local/rvm/scripts/rvm
-                rvm --create use "${RVERSION}@${GEMSET}"
+                #. /etc/profile
+                #. /usr/local/rvm/scripts/rvm
+                envf="$(/usr/local/rvm/bin/rvm info "${RVERSION}@${GEMSET}" homes|grep gem:|awk '{print $2}'|sed -e 's/"//g')/environment"
+                . "${envf}"
 
 {{cfg.name}}-rvm-wrapper:
   file.managed:

@@ -1,11 +1,15 @@
 {% set cfg = salt['mc_project.get_configuration'](project) %}
+{% set data = cfg.data %}
 # Settings specified here will take precedence over those in config/application.rb
 RedmineApp::Application.configure do
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true
+  {% if data.version[0] > '2' %}
   config.log_level = :info
+  {% endif %}
 
+  {% if data.version[0] > '2' %}
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -14,7 +18,8 @@ RedmineApp::Application.configure do
 
    # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
-  config.action_controller.perform_caching = true 
+  config.action_controller.perform_caching = true
+  {% endif %}
   #####
   # Customize the default logger
   # http://www.ruby-doc.org/stdlib-1.8.7/libdoc/logger/rdoc/Logger.html
@@ -43,7 +48,9 @@ RedmineApp::Application.configure do
 
   config.active_support.deprecation = :log
 
+  {% if data.version[0] > '2' %}
   config.secret_token = '{{salt['mc_utils.generate_stored_password'](cfg.name+"-rails_pw", 96)}}'
   config.active_record.raise_in_transactional_callbacks = true
   config.active_record.whitelist_attributes = false
+  {% endif %}
 end
