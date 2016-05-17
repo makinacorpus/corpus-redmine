@@ -47,7 +47,6 @@ prepreqs-{{cfg.name}}:
       - libxml2-dev
       - libxslt1-dev
       - libopenjpeg-dev
-      - libopenjpeg2
       - m4
       - man-db
       - pkg-config
