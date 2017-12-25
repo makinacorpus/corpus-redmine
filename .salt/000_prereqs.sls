@@ -6,6 +6,7 @@ include:
   - makina-states.services.http.nginx
   - makina-states.localsettings.rvm
 
+
 prepreqs-{{cfg.name}}:
   pkg.installed:
     - pkgs:
@@ -76,7 +77,7 @@ prepreqs-{{cfg.name}}:
               rm -vf {{project_root}}/redmine
               ln -svf {{project_root}}/redmine-{{data.version}} {{project_root}}/redmine
             fi
-    - use_vt: true
+    - use_vt: "{{data.use_vt}}"
     - cwd: {{cfg.project_root}}
     - user: {{cfg.user}}
 

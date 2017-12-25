@@ -2,7 +2,7 @@
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 {% set project_root=cfg.project_root%}
-{% import "makina-states/localsettings/rvm.sls" as rvm with context %}
+{% import "makina-states/localsettings/rvm/init.sls" as rvm with context %}
 
 include:
   - makina-projects.{{cfg.name}}.task_rvm

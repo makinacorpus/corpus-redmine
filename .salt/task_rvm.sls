@@ -10,14 +10,13 @@
     - user: {{cfg.user}}
     - group: {{cfg.group}}
     - contents: |
-                #!/usr/bin/env bash
-                set -e
-                GEMSET="${GEMSET:-"{{data.gemset}}"}"
-                RVERSION="${RVERSION:-"{{data.rversion.strip()}}"}"
-                #. /etc/profile
-                #. /usr/local/rvm/scripts/rvm
-                envf="$(/usr/local/rvm/bin/rvm info "${RVERSION}@${GEMSET}" homes|grep gem:|awk '{print $2}'|sed -e 's/"//g')/environment"
-                . "${envf}"
+            #!/usr/bin/env bash
+            . /etc/profile
+            . /usr/local/rvm/scripts/rvm
+            if ! ( bundle --version; );then
+              rvm $R do gem install bundler rake rvm;
+            fi
+            rvm --create use $R
 
 {{cfg.name}}-rvm-wrapper:
   file.managed:
@@ -30,11 +29,11 @@
     - contents: |
                 #!/usr/bin/env bash
                 set -e
-                ww="${PWD}"
+                ww="$(pwd)"
                 w="$(dirname "${0}")"
                 cd "${w}"
-                CWD="${PWD}"
-                cd "${CWD}"
+                CWD="$(pwd)"
+                cd "$(pwd)"
                 . "${CWD}/rvm-env.sh"
                 cd "${ww}"
                 exec "${@}"

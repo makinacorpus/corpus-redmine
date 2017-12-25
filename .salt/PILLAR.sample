@@ -24,15 +24,15 @@
 
 makina-projects.projectname:
   data:
-    fixperms_cron_periodicity: "0 */2 * * *"
+    use_vt: false
     nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
     nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
     host: 127.0.0.1
     port: 9000
     log_level: Logger::ERROR
-    rversion: 2.1.2
+    rversion: 2.4.2
     #rversion: 1.9.3
-    version: 3.0.3
+    version: 3.4.3
     smtp_address: 127.0.0.1
     smtp_tls: true
     smtp_noauth: False
@@ -59,20 +59,17 @@ makina-projects.projectname:
       redmine_importer:
         git: https://github.com/makinacorpus/redmine_importer.git
         rev: "redmine3-3"
-      redmine_dmsf:
-        git: https://github.com/makinacorpus/redmine_dmsf.git
-        rev: "devel-1.5.1"
-      redmine_ldap_sync:
-        git: https://github.com/thorin/redmine_ldap_sync.git
-      redmine_lightbox:
-        git: https://github.com/zipme/redmine_lightbox.git
-      scrum2b:
-        git: https://github.com/makinacorpus/scrum2b.git
       redmine_monitoring_controlling:
         git: https://github.com/alexmonteiro/Redmine-Monitoring-Controlling.git
-    force_ssl: true
-    htaccess: "/etc/{name}.webaccess"
-    http_users: []
+      #redmine_dmsf:
+      #  git: https://github.com/makinacorpus/redmine_dmsf.git
+      #  rev: "devel-1.5.1"
+      redmine_ldap_sync:
+        git: https://github.com/thorin/redmine_ldap_sync.git
+      #redmine_lightbox:
+      #  git: https://github.com/zipme/redmine_lightbox.git
+      #scrum2b:
+      #  git: https://github.com/makinacorpus/scrum2b.git
   env_defaults:
     dev:
       opt: value2
